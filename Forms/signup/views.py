@@ -7,7 +7,6 @@ from . import models, forms
 # Create your views here.
 
 def Index(request):
-            
     return render(request, 'signup.html')
 
 def GetSignUp(request):
@@ -19,5 +18,11 @@ def GetSignUp(request):
             tmpPhone = request.POST['phone']
             newCus = models.Customer(name=tmpName, email=tmpEmail, phone=tmpPhone)
             newCus.save()
-            return HttpResponse("Done")
+            context = {
+                'Flag': True
+            }
+            return render(request, 'signup.html', context)
     return HttpResponse("Error")
+
+def error_404(request, exception):
+    return render(request, '404.html')

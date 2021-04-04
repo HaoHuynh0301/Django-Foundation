@@ -20,3 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('signup.urls'))
 ]
+
+handler404 = 'signup.views.error_404'
