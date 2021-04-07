@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path('', views.Index, name="index"),
+    path('signupdone/', views.getSignUpPost, name="getsignuppost")
 ]
