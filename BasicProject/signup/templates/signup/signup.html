@@ -5,39 +5,35 @@
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <body>
-   <div class="container">
-      <div class="col-md-6 mx-auto text-center">
-         <div class="header-title">
-             <h1 class="title">Hello Django</h1>
-         </div>
-      </div>
+    <div class="container">
+        <div class="col-md-6 mx-auto text-center">
+             <div class="header-title">
+                 <h1 class="title">Hello Django</h1>
+             </div>
+          </div>
 
-      {% if Flag %}
-      <h1 class="title" style="background-color: greenyellow; align-items: center;">Done</h1>
-      {% endif %}
+          {% if Flag %}
+          <h1 class="title" style="background-color: greenyellow; align-items: center;">Done</h1>
+          {% endif %}
 
-      <div class="row">
-         <div class="col-md-4 mx-auto">
-            <div class="myform form ">
-               <form action="{% url 'getsignuppost' %}" method="POST" name="login">
-                   {% csrf_token %}
-                    {% if context %}
-                        {% if context.res == True %}
-                           {% block signup %}
-                           {% endblock signup %}
-                        {% endif %}
-                    {% endif %}
-                  {{ form.as_p }}
-                  <div class="form-group">
-                     <a class="btn btn-block g-button" href="#">
-                     <i class="fa fa-google"></i> Sign up with Google
-                     </a>
-                  </div>
-                  <p class="small mt-3">By signing up, you are indicating that you have read and agree to the <a href="#" class="ps-hero__content__link">Terms of Use</a> and <a href="#">Privacy Policy</a>.
-                  </p>
-               </form>
-            </div>
-         </div>
-      </div>
+          <div class="row">
+             <div class="col-md-4 mx-auto">
+                <div class="myform form">
+                   <form action="{% url 'getsignuppost' %}" method="POST" name="login">
+                       {% csrf_token %}
+                       {{ form.as_p }}
+
+                       <input type="submit" name="signup" value="Sign Up" class="btn btn-default">
+                       <div class="form-group">
+                          <a class="btn btn-block g-button" href="#">
+                          <i class="fa fa-google"></i> Sign up with Google
+                          </a>
+                       </div>
+                       <p class="small mt-3">By signing up, you are indicating that you have read and agree to the <a href="#" class="ps-hero__content__link">Terms of Use</a> and <a href="#">Privacy Policy</a>.
+                       </p>
+                   </form>
+                </div>
+             </div>
+          </div>
    </div>
 </body>

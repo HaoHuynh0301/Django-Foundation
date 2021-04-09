@@ -6,6 +6,7 @@ from . import forms
 
 def Index(request):
     form = forms.signUpForm()
+
     context = {
         'form': form
     }
@@ -17,10 +18,12 @@ def view_404_error(request, exception):
 def getSignUpPost(request):
     if request.method == "POST":
         res = False
-        signUpForm = forms.signUpForm(name=request.POST["name"], email=request.POST["email"])
+        signUpForm = forms.signUpForm(request.POST)
+
         if signUpForm.is_valid():
             res = True
-        context = {
-            'res': res
-        }
-        return render(request, "signup/signup.html", context)
+            signUpForm.save()
+            return HttpResponse("Done")
+
+        else:
+            return HttpResponse("False")
