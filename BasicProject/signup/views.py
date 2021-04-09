@@ -7,23 +7,23 @@ from . import forms
 def Index(request):
     form = forms.signUpForm()
 
-    context = {
+    context_form = {
         'form': form
     }
-    return render(request, 'signup/signup.html', context)
+    return render(request, 'signup/signupform.html', context_form)
 
 def view_404_error(request, exception):
     return render(request, '404.html')
 
 def getSignUpPost(request):
     if request.method == "POST":
-        res = False
-        signUpForm = forms.signUpForm(request.POST)
-
-        if signUpForm.is_valid():
-            res = True
-            signUpForm.save()
-            return HttpResponse("Done")
-
-        else:
-            return HttpResponse("False")
+        data = forms.signUpForm(request.POST)
+        Res = False
+        if data.is_valid():
+            Res = True;
+        
+        context_signup = {
+            'Res': Res
+        }
+        
+    return render(request, 'signup/signuppost.html', context_signup)

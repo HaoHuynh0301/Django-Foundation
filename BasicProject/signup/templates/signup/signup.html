@@ -10,30 +10,14 @@
              <div class="header-title">
                  <h1 class="title">Hello Django</h1>
              </div>
-          </div>
+        </div>
 
-          {% if Flag %}
-          <h1 class="title" style="background-color: greenyellow; align-items: center;">Done</h1>
-          {% endif %}
+        {% block signuppost %}
 
-          <div class="row">
-             <div class="col-md-4 mx-auto">
-                <div class="myform form">
-                   <form action="{% url 'getsignuppost' %}" method="POST" name="login">
-                       {% csrf_token %}
-                       {{ form.as_p }}
+        {% endblock signuppost %}
 
-                       <input type="submit" name="signup" value="Sign Up" class="btn btn-default">
-                       <div class="form-group">
-                          <a class="btn btn-block g-button" href="#">
-                          <i class="fa fa-google"></i> Sign up with Google
-                          </a>
-                       </div>
-                       <p class="small mt-3">By signing up, you are indicating that you have read and agree to the <a href="#" class="ps-hero__content__link">Terms of Use</a> and <a href="#">Privacy Policy</a>.
-                       </p>
-                   </form>
-                </div>
-             </div>
-          </div>
+        {% block signupform %}
+
+        {% endblock signupform %}
    </div>
 </body>
