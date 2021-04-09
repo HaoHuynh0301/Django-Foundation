@@ -5,7 +5,7 @@ from . import forms
 # Create your views here.
 
 def Index(request):
-    form = forms.signUpForm()
+    form = forms.customSignUpForm()
 
     context_form = {
         'form': form
@@ -21,6 +21,7 @@ def getSignUpPost(request):
         Res = False
         if data.is_valid():
             Res = True;
+            data.save()
         
         context_signup = {
             'Res': Res
