@@ -6,5 +6,5 @@ app_name = 'contact'
 
 urlpatterns = [
     path('', views.returnContact, name='contact'),
-    path('', views.getPost, name="getPost")
+    path('contactget/', views.getPost, name="getPost")
 ]
