@@ -5,6 +5,5 @@ from . import views
 app_name = 'contact'
 
 urlpatterns = [
-    path('', views.returnContact, name='contact'),
-    path('contactget/', views.getPost, name="getPost")
+    path('', views.Contact.as_view(), name='contact'),
 ]
