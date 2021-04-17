@@ -1,4 +1,4 @@
-{% extends 'store/home.html' %}
+	{% extends 'store/home.html' %}
 {% load static %}
 
 {% block content %}
@@ -44,6 +44,7 @@
 		<br>
 		<div class="box-element hidden" id="payment-info">
 			<small>Paypal Options</small>
+			<button id="make-payment" class="form-button">Payment</button>
 		</div>
 		
 	</div>
@@ -71,8 +72,28 @@
 </div>
 <script type="text/javascript">
 	var shipping = '{{order.shipping}}'
-	if(shipping == 'False') {
-		document.getElementById('shopping-info').innerHTML = ' '
+	if(shipping === 'False') {
+		document.getElementById('shipping-info').innerHTML = " ";
+	}
+
+	if (use != 'AnonymousUser') {
+		document.getElementById('user-infor').innerHTML = " "
+	}
+
+	var form = document.getElementById('form')
+	form.addEventListener('submit', function(e) {
+		e.preventDefault()
+		console.log("Form submitted ...")
+		document.getElementById('form-button').classList.add('hidden')
+		document.getElementById('payment-info').classList.remove('hidden')
+	})
+
+	document.getElementById('make-payment').addEventListener('click', function(e) {
+
+	});
+
+	function submitFormData() {
+		console.log("Click")
 	}
 </script>
 {% endblock content %}
