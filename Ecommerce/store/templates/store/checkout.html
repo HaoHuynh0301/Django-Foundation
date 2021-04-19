@@ -6,7 +6,7 @@
 	<div class="col-lg-6">
 		<div class="box-element" id="form-wrapper">
 			<form id="form">
-				<div id="user-info">
+				<div id="user-infor">
 					<div class="form-field">
 						<input required class="form-control" type="text" name="name" placeholder="Name..">
 					</div>
@@ -72,11 +72,13 @@
 </div>
 <script type="text/javascript">
 	var shipping = '{{order.shipping}}'
+	var total = '{{order.get_cart_total}}'
+
 	if(shipping === 'False') {
-		document.getElementById('shipping-info').innerHTML = " ";
+		document.getElementById('shipping-info').innerHTML = " "
 	}
 
-	if (use != 'AnonymousUser') {
+	if (user != 'AnonymousUser') {
 		document.getElementById('user-infor').innerHTML = " "
 	}
 
@@ -89,11 +91,48 @@
 	})
 
 	document.getElementById('make-payment').addEventListener('click', function(e) {
-
+		submitFormData()
 	});
 
 	function submitFormData() {
 		console.log("Click")
+
+		var userFormData = {
+			'name': 'hao',
+			'email': 'hao152903@gmail.com',
+			'total': total
+		}
+
+		var shippingInfor = {
+			'address': null,
+			'city': null,
+			'state': null,
+			'zipcode': null
+		}
+
+		if (shipping != 'False') {
+			shippingInfor.address = form.address.value
+			shippingInfor.city = form.city.value
+			shippingInfor.state = form.state.value
+			shippingInfor.zipcode = form.zipcode.value
+		} 
+
+		var url = '/process_order/'
+
+		fetch (url, {
+			method: 'POST',
+			headers: {
+				'content-Type': 'application/json',
+				'X-CSRFToken': csrftoken,
+			},
+
+			body: JSON.stringify({'form': userFormData, 'shipping': shippingInfor}),
+		})
+		.then((data) => {
+			console.log('Success: ', data);
+			alert('Transiction Complete');
+			window.location.href = "{% url 'store:store' %}"
+		})
 	}
 </script>
 {% endblock content %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from . import models
+import datetime
 import json
 from django.http import JsonResponse, HttpResponse
 
@@ -75,4 +76,55 @@ def updateItem(request):
 		orderitem.delete()
 
 	return JsonResponse("Done", safe = False)
+
+
+def processOrder(request):
+	transaction_id = datetime.datetime.now().timestamp()
+	data = json.load(request.body)
+
+	if request.user.is_authenticated:
+		customer = request.user.customer
+		order, created = models.Order.objects.get_or_create(customer = customer, complete = False)
+		total = float(data['form']['total'])
+		order.transaction_id = transaction_id
+
+		if total == order.get_cart_total:
+			order.complete = True
+
+		order.save()
+	return JsonResponse("Payment", safe = False)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
