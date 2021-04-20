@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="33155de7-842f-48e8-9d74-ab76c27e4f0b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/store/migrations/0004_auto_20210415_1459.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="d47ea5b2-45aa-4b23-8377-30373bd08fb7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Ecommerce/store/migrations/0004_auto_20210415_1459.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ecommerce/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ecommerce/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,7 +13,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1qycPDQNw64bRFKEltSFldpbb68" />
+  <component name="ProjectId" id="1rQvLqb6jrH4jC1crCTv2m0YZcT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,8 +28,8 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
   </component>
   <component name="RunManager">
-    <configuration name="Ecommerce" type="Python.DjangoServer" factoryName="Django server">
-      <module name="Ecommerce" />
+    <configuration name="Form_practice" type="Python.DjangoServer" factoryName="Django server">
+      <module name="Form_practice" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -57,13 +57,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="33155de7-842f-48e8-9d74-ab76c27e4f0b" name="Default Changelist" comment="" />
-      <created>1618055243914</created>
+      <changelist id="d47ea5b2-45aa-4b23-8377-30373bd08fb7" name="Default Changelist" comment="" />
+      <created>1618921074437</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1618055243914</updated>
-      <workItem from="1618055287502" duration="60000" />
-      <workItem from="1618921025757" duration="142000" />
+      <updated>1618921074437</updated>
+      <workItem from="1618921129072" duration="38000" />
     </task>
     <servers />
   </component>
