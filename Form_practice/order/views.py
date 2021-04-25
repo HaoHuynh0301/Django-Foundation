@@ -25,3 +25,4 @@ def Checkout(request):
 	context = {'orderitems': orderitems, 'totalitems': cardItems, 'order': order, 'totalprice': totalPrice}
 
 	return render(request, 'checkout.html', context)
+	

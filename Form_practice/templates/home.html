@@ -1,32 +1,16 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<title>Order</title>
 </head>
 <body>
 	<div class="container">
-			{% if products %}
-				{% for product in products %}
-					<div class="col-lg-4">
-						<img class="thumbnail" src="{{ product.imageURL }}">
-						<div class="box-element product">
-							<h6><strong></strong></h6>
-							<hr>
-							<button class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-							<a class="btn btn-outline-success" href="">View</a>
-							<h4 style="display: inline-block; float: right"><strong>${{ product.price|floatformat:2 }}</strong></h4>
-						</div>
-					</div>
-				{% endfor %}
-				
-			{% endif %}
+		<form class="form-login">
+			<label for=""></label>
+			
+		</form>
 	</div>
 </body>
 </html>
