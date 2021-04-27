@@ -9,5 +9,7 @@ urlpatterns = [
     path('about/', views.getAbout, name='about'),
     path('samplepost/', views.getSamplePost, name='samplePost'),
     path('contact/', views.getContact, name='contact'),
-    path('writeblog/', views.getWrite, name='writeblog')
+    path('writeblog/', views.getWrite, name='writeblog'),
+    path('getContactInfor/', views.getContactInfor, name='getContact'),
+    path('detail/<int:post_id>/', views.detail, name = 'detail')
 ]
