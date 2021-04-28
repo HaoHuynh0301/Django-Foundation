@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -18,3 +19,17 @@ class Contact(models.Model):
 
 	def __str__(self):
 		return str(self.name)
+
+class Role(models.Model):
+    name = models.CharField(max_length = 255, blank = True, null = True)
+    
+    def __str__(self):
+        return self.name
+    
+class BlogUser(models.Model):
+    user = models.OneToOneField(User, blank = True, on_delete = models.CASCADE)
+    role = models.ForeignKey(Role, on_delete = models.SET_NULL, null = True)
+    name = models.CharField(max_length = 255, blank = True, null = True)
+    
+    def __str__(self):
+        return self.user

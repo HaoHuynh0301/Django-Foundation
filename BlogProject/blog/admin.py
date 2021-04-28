@@ -4,3 +4,5 @@ from . import models
 
 admin.site.register(models.Post)
 admin.site.register(models.Contact)
+admin.site.register(models.Role)
+admin.site.register(models.BlogUser)

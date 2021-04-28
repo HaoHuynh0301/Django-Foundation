@@ -10,6 +10,10 @@ urlpatterns = [
     path('samplepost/', views.getSamplePost, name='samplePost'),
     path('contact/', views.getContact, name='contact'),
     path('writeblog/', views.getWrite, name='writeblog'),
+    path('register/', views.getRegister, name='register'),
+    path('login/', views.getLogin, name='login'),
     path('getContactInfor/', views.getContactInfor, name='getContact'),
-    path('detail/<int:post_id>/', views.detail, name = 'detail')
+    path('detail/<int:post_id>/', views.detail, name = 'detail'),
+    path('writeblog/createBlog/', views.creatBlog, name = 'createBlog'),
+    path('login/getLogin/', views.getLoginInfor, name = 'getLogin')
 ]

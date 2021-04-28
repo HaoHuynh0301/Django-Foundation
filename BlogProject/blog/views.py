@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.db.models import Max
 from . import models
 from .forms import ContactForm, PostForm
 
@@ -6,8 +7,6 @@ from .forms import ContactForm, PostForm
 
 def gethome(request):
 	listPost = models.Post.objects.all()
-	for i in listPost:
-		print( i.date )
 	context = {
 		'listPost': listPost
 	}
@@ -16,14 +15,27 @@ def gethome(request):
 def getAbout(request):
 	return render(request, 'about.html')
 
+def getRegister(request):
+    return render(request, 'register.html')
+
 def getSamplePost(request):
-	return render(request, 'samplepost.html')
+    listPost = models.Post.objects.all()
+    samplePost = listPost.order_by('id')[0]
+    
+    context = {
+        'samplePost': samplePost
+    }
+    
+    return render(request, 'samplePost.html', context)
 
 def getContact(request):
 	return render(request, 'contact.html')
 
 def getWrite(request):
 	return render(request, 'writeblog.html')
+
+def getLogin(request):
+    return render(request, 'login.html')
 
 def creatBlog(request):
     if request.method == 'POST':
@@ -51,3 +63,22 @@ def detail(request, post_id):
         'Post': Post
     }
     return render(request, 'detail.html', context)
+
+def getLoginInfor(request):
+    if request.user.is_authenticated:
+        listPost = models.Post.objects.all()
+        context = {
+            'listPost': listPost
+        }
+        return render(request, 'home.html', context)
+    return render(request, 'home.html', context)
+
+def getRegisterInfor(request):
+    if request.user.is_authenticated:
+        listPost = models.Post.objects.all()
+        context = {
+            'listPost': listPost
+        }
+        return render(request, 'home.html', context)
+    else:
+        
