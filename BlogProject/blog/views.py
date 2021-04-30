@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Max
+from django.contrib.auth import authenticate, login, logout
 from . import models
 from .forms import ContactForm, PostForm
 
@@ -32,9 +33,14 @@ def getContact(request):
 	return render(request, 'contact.html')
 
 def getWrite(request):
-	return render(request, 'writeblog.html')
+    if request.user.is_authenticated:
+        return render(request, 'writeblog.html')
+    return gethome(request)
 
+        
 def getLogin(request):
+    if request.user.is_authenticated:
+        return gethome(request)
     return render(request, 'login.html')
 
 def creatBlog(request):
@@ -65,13 +71,19 @@ def detail(request, post_id):
     return render(request, 'detail.html', context)
 
 def getLoginInfor(request):
-    if request.user.is_authenticated:
-        listPost = models.Post.objects.all()
-        context = {
-            'listPost': listPost
-        }
-        return render(request, 'home.html', context)
-    return render(request, 'home.html', context)
+    if request.method == 'POST':  
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            print("Login Successfully")
+            return gethome(request)
+        else:
+            print("Login UnSuccessfully")
+            return gethome(request)
+    return gethome(request)
+            
 
 def getRegisterInfor(request):
     if request.user.is_authenticated:
@@ -81,4 +93,4 @@ def getRegisterInfor(request):
         }
         return render(request, 'home.html', context)
     else:
-        
+        return gethome(request)
