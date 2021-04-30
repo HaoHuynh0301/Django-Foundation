@@ -75,14 +75,18 @@ def getLoginInfor(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+        Flag = False;
         if user is not None:
             login(request, user)
             print("Login Successfully")
-            return gethome(request)
+            Flag = True;
         else:
             print("Login UnSuccessfully")
-            return gethome(request)
-    return gethome(request)
+            
+        context = {
+            'Flag': Flag
+        }
+    return render(request, 'home.html', context)
             
 
 def getRegisterInfor(request):
