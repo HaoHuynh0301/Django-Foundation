@@ -1,53 +1,104 @@
 from django.shortcuts import render, redirect
 from django.db.models import Max
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from . import models
 from .forms import ContactForm, PostForm
 
 # Create your views here.
 
 def gethome(request):
-	listPost = models.Post.objects.all()
-	context = {
-		'listPost': listPost
+    auth = False
+    if request.user.is_authenticated:
+        auth = True
+        
+    listPost = models.Post.objects.all()
+    context = {
+		'listPost': listPost,
+        'auth': auth
 	}
-	return render(request, 'home.html', context)
+    
+    return render(request, 'home.html', context)
 
 def getAbout(request):
-	return render(request, 'about.html')
+    auth = False
+    if request.user.is_authenticated:
+        auth = True
+    context = {
+        'auth': auth
+    }
+    return render(request, 'about.html', context)
 
 def getRegister(request):
-    return render(request, 'register.html')
+    auth = False
+    if request.user.is_authenticated:
+        auth = True
+    context = {
+        'auth': auth
+    }
+    return render(request, 'register.html', context)
 
 def getSamplePost(request):
+    auth = False
+    if request.user.is_authenticated:
+        auth = True
     listPost = models.Post.objects.all()
     samplePost = listPost.order_by('id')[0]
     
     context = {
-        'samplePost': samplePost
+        'samplePost': samplePost,
+        'auth': auth
     }
     
     return render(request, 'samplePost.html', context)
 
 def getContact(request):
-	return render(request, 'contact.html')
+    auth = False
+    if request.user.is_authenticated:
+        auth = True
+    context = {
+        'auth': auth
+    }
+    return render(request, 'contact.html', context)
 
+@login_required(login_url = 'blog:login')
 def getWrite(request):
     if request.user.is_authenticated:
         return render(request, 'writeblog.html')
-    return gethome(request)
 
         
 def getLogin(request):
     if request.user.is_authenticated:
-        return gethome(request)
-    return render(request, 'login.html')
+        context = {
+            'auth': True
+        }
+        return render(request, 'login.html', context)
+    
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        Flag = False;
+        if user is not None:
+            login(request, user)
+            print("Login Successfully")
+            Flag = True;
+        else:
+            print("Login UnSuccessfully")
+            
+        context = {
+            'Flag': Flag,
+            'auth': True
+        }
+        return render(request, 'home.html', context)
+    
+    return render(request, 'login.html', context = {'Auth': False})
 
 def creatBlog(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            newPost = models.Post.objects.create(title = form.cleaned_data['title'], content = form.cleaned_data['content'])
+            newPost = models.Post.objects.create(user = request.user ,title = form.cleaned_data['title'], content = form.cleaned_data['content'])
             newPost.save()
     return render(request, 'writeblog.html')
 
@@ -64,29 +115,15 @@ def getContactInfor(request):
     return render(request, 'contact.html')
 
 def detail(request, post_id):
+    auth = False
+    if request.user.is_authenticated:
+        auth = True
     Post = models.Post.objects.get(id = post_id)
     context = {
-        'Post': Post
+        'Post': Post,
+        'auth': auth
     }
     return render(request, 'detail.html', context)
-
-def getLoginInfor(request):
-    if request.method == 'POST':  
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        Flag = False;
-        if user is not None:
-            login(request, user)
-            print("Login Successfully")
-            Flag = True;
-        else:
-            print("Login UnSuccessfully")
-            
-        context = {
-            'Flag': Flag
-        }
-    return render(request, 'home.html', context)
             
 
 def getRegisterInfor(request):
@@ -98,3 +135,7 @@ def getRegisterInfor(request):
         return render(request, 'home.html', context)
     else:
         return gethome(request)
+    
+def getLogout(request):
+    logout(request)
+    return gethome(request)

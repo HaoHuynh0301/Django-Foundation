@@ -3,6 +3,14 @@
 
 
 {% block contactContent %}
+
+<!-- Navigation -->
+{% if auth %}
+	{% include 'navigation_logout.html'%}
+{% else %}
+  {% include 'navigation.html' %}
+{% endif %}
+
 <!-- Page Header -->
 <header class="masthead" style="background-image: url({% static 'img/contact-bg.jpg' %})">
   <div class="overlay"></div>

@@ -15,5 +15,5 @@ urlpatterns = [
     path('getContactInfor/', views.getContactInfor, name='getContact'),
     path('detail/<int:post_id>/', views.detail, name = 'detail'),
     path('writeblog/createBlog/', views.creatBlog, name = 'createBlog'),
-    path('login/getLogin/', views.getLoginInfor, name = 'getLogin')
+    path('logout/', views.getLogout, name = "logout")
 ]
