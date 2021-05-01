@@ -35,39 +35,41 @@
 				</div>
 				<div class="d-flex justify-content-center form_container">
 
-					<form method="POST" action="">
+					<form method="POST" action="{% url 'blog:register' %}">
 						{% csrf_token %}
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
-							<input type="text" name = "username" id = "username" >
+							{{form.username}}
 						</div>
                         
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 							</div>
-							<input type="email" name = "email" id = "email" >
+							{{form.email}}
 						</div>
 
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" name = "password1" id = "password1" >
+							{{form.password1}}
 						</div>
 
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-							<input type="password" name = "password2" id = "password2" >
+							{{form.password2}}
 						</div>
 
 				   		<div class="d-flex justify-content-center mt-3 login_container">
 				 			<input name = "createUser" class="btn login_btn" type="submit" value="Register Account">
+							<h1>{{error.message}}</h1>
 				   		</div>
+
 
 					</form>
 				</div>

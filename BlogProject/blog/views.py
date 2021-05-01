@@ -3,7 +3,7 @@ from django.db.models import Max
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from . import models
-from .forms import ContactForm, PostForm
+from .forms import ContactForm, PostForm, CreateUserForms
 
 # Create your views here.
 
@@ -31,11 +31,31 @@ def getAbout(request):
 
 def getRegister(request):
     auth = False
+    formRegister = CreateUserForms()
+    
     if request.user.is_authenticated:
         auth = True
+        
     context = {
-        'auth': auth
+        'auth': auth,
+        'form': formRegister
     }
+    
+    if request.method == 'POST':
+        formGet = CreateUserForms(request.POST)
+        if formGet.is_valid():
+            formGet.save()
+            username = formGet.cleaned_data['username']
+            email = formGet.cleaned_data['email']
+            password = formGet.cleaned_data['password1']
+            
+        else:
+            contextError = {
+                'auth': auth,
+                'form': formRegister,
+                'error': formGet.error_messages }
+            return render(request, 'register.html', contextError )
+
     return render(request, 'register.html', context)
 
 def getSamplePost(request):
@@ -125,17 +145,6 @@ def detail(request, post_id):
     }
     return render(request, 'detail.html', context)
             
-
-def getRegisterInfor(request):
-    if request.user.is_authenticated:
-        listPost = models.Post.objects.all()
-        context = {
-            'listPost': listPost
-        }
-        return render(request, 'home.html', context)
-    else:
-        return gethome(request)
-    
 def getLogout(request):
     logout(request)
     return gethome(request)
