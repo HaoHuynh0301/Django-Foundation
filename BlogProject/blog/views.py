@@ -46,9 +46,13 @@ def getRegister(request):
         if formGet.is_valid():
             formGet.save()
             username = formGet.cleaned_data['username']
-            email = formGet.cleaned_data['email']
             password = formGet.cleaned_data['password1']
-            
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                print("Login Successfully")
+                newBlogUser = models.BlogUser(user = request.user, role = 1, name = username)
+                newBlogUser.save()
         else:
             contextError = {
                 'auth': auth,
